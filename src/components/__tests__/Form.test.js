@@ -4,6 +4,9 @@ import { render, cleanup } from "@testing-library/react";
 
 import Form from "components/Appointment/Form";
 
+/* with the rest of the imports */
+import { fireEvent } from "@testing-library/react";
+
 afterEach(cleanup);
 
 describe("Form", () => {
@@ -27,6 +30,12 @@ describe("Form", () => {
 });
 it("validates that the student name is not blank", () => {
   /* 1. validation is shown */
+  const onSave = jest.fn();
+  const { getByText } = render(
+    <Form interviewers={interviewers} name="" onSave={onSave} />
+    );
+  fireEvent.click(getByText("Save"));
+
   expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
 
   /* 2. onSave is not called */
@@ -35,6 +44,15 @@ it("validates that the student name is not blank", () => {
 
 it("calls onSave function when the name is defined", () => {
   /* 3. validation is not shown */
+  const onCancel = jest.fn();
+  const { getByText, queryByText } = render(
+    <Form
+    interviewers={interviewers}
+    onSave={onSave}
+    name="Lydia Miller-Jones"
+  />
+);
+  fireEvent.click(getByText("Save"));
   expect(queryByText(/student name cannot be blank/i)).toBeNull();
 
   /* 4. onSave is called once*/
