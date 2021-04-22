@@ -42,7 +42,7 @@ describe("Application", () => {
     const day = getAllByTestId(container, "day").find(day =>
       queryByText(day, "Monday")
     );
-    console.log(prettyDOM(day));
+    //console.log(prettyDOM(day));
     expect(getByText(day, "no spots remaining")).toBeInTheDocument();
   });
   it("loads data, books an interview and reduces the spots remaining for Monday by 1", async () => {
