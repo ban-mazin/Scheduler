@@ -5,11 +5,20 @@ import InterviewerList from "components/InterviewerList";
 
 
 export default function Form(props) {
+
+  const [error, setError] = useState("");
+  const [name , setName] = useState(props.name || "");
+  const [interviewer , setInterviewer] = useState(props.interviewer || null);
+
   function validate() {
     if (name === "") {
       setError("Student name cannot be blank");
       return;
     };
+    if (! interviewer){
+      setError("interviwer can not be embty");
+      return;
+    }
     setError("");
     props.onSave(name, interviewer);
   };
@@ -22,9 +31,7 @@ export default function Form(props) {
     reset();
     props.onCancel();
   };
-  const [error, setError] = useState("");
-  const [name , setName] = useState(props.name || "");
-  const [interviewer , setInterviewer] = useState(props.interviewer || null);
+  
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
