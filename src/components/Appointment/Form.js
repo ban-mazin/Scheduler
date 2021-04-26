@@ -16,7 +16,7 @@ export default function Form(props) {
       return;
     };
     if (! interviewer){
-      setError("interviwer can not be embty");
+      setError("interviewer can not be embty");
       return;
     }
     setError("");
